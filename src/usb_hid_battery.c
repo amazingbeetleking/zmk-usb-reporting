@@ -140,7 +140,9 @@ static void send_battery_report(struct battery_report *report) {
         return;
     }
     
-    if (zmk_usb_get_status() != ZMK_USB_CONN_POWERED) {
+    /* Only send when USB is connected */
+    enum zmk_usb_conn_state usb_state = zmk_usb_get_conn_state();
+    if (usb_state != ZMK_USB_CONN_HID) {
         return;
     }
     
@@ -204,14 +206,10 @@ static int usb_hid_battery_init(void) {
         return -ENODEV;
     }
     
-    ret = usb_hid_register_device(hid_dev,
-                                   battery_hid_report_desc,
-                                   sizeof(battery_hid_report_desc),
-                                   &hid_ops);
-    if (ret != 0) {
-        LOG_ERR("Failed to register HID device: %d", ret);
-        return ret;
-    }
+    usb_hid_register_device(hid_dev,
+                            battery_hid_report_desc,
+                            sizeof(battery_hid_report_desc),
+                            &hid_ops);
     
     ret = usb_hid_init(hid_dev);
     if (ret != 0) {
