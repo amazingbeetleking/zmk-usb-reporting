@@ -99,7 +99,7 @@ static int hid_get_report_cb(const struct device *dev,
             #if IS_ENABLED(CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING)
             {
                 uint8_t level = 0;
-                int rc = zmk_split_get_peripheral_battery_level(0, &level);
+                int rc = zmk_split_central_get_peripheral_battery_level(0, &level);
                 if (rc == 0) {
                     left_battery_report.level = level;
                 }
@@ -114,7 +114,7 @@ static int hid_get_report_cb(const struct device *dev,
             #if IS_ENABLED(CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING)
             {
                 uint8_t level = 0;
-                int rc = zmk_split_get_peripheral_battery_level(1, &level);
+                int rc = zmk_split_central_get_peripheral_battery_level(1, &level);
                 if (rc == 0) {
                     right_battery_report.level = level;
                 }
