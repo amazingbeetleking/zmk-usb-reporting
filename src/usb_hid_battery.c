@@ -184,10 +184,6 @@ static int usb_hid_battery_init(void) {
     /* Zephyr 4.1 compatible: find HID device by DT node */
     hid_dev = device_get_binding("HID_1");
     if (hid_dev == NULL) {
-        /* Fallback: try HID_0 */
-        hid_dev = device_get_binding("HID_0");
-    }
-    if (hid_dev == NULL) {
         LOG_ERR("Failed to get HID device binding for battery");
         return -ENODEV;
     }
