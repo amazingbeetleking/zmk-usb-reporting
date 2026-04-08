@@ -16,7 +16,7 @@
 #include <zmk/usb.h>
 
 #if IS_ENABLED(CONFIG_ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING)
-#include <zmk/split/bluetooth/central.h>
+#include <zmk/split/central.h>
 #endif
 
 LOG_MODULE_REGISTER(usb_hid_battery, CONFIG_ZMK_LOG_LEVEL);
